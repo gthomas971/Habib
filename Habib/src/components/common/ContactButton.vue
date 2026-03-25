@@ -35,8 +35,9 @@ const isOpen = ref(false)
   bottom: 20px;
   right: 20px;
   cursor: pointer;
-  background-color: deepskyblue;
+  background-color: #387b7e;
   border-radius: 5px;
+  z-index: 998;
 }
 
 /**********************/

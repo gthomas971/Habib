@@ -8,87 +8,28 @@
       Elle reflète son état, sa valeur et son entretien.
     </p>
 
-    <!-- Importance -->
-    <div class="block">
-      <h3>Pourquoi entretenir sa façade est indispensable ?</h3>
-      <ul>
-        <li>Protection contre les intempéries (pluie, gel, pollution, UV)</li>
-        <li>Prévention des infiltrations et de l’humidité</li>
-        <li>Amélioration de l’isolation thermique</li>
-        <li>Valorisation du bien immobilier</li>
-      </ul>
-    </div>
+    <QuestionWithReasons  class="block" :question="data.partOne.question" :reasons="data.partOne.reasons"/>
 
-    <!-- Solutions -->
-    <div class="block">
-      <h3>Nos solutions d’entretien et de ravalement</h3>
+    <advice-solution class="block" :title="data.advices.title" :advices="data.advices.solutions"/>
 
-      <div class="grid">
-        <div class="card">
-          <h4>🧼 Nettoyage de façade</h4>
-          <p>Élimination des salissures, mousses et pollution.</p>
-        </div>
-
-        <div class="card">
-          <h4>🌿 Traitement anti-mousse</h4>
-          <p>Protection durable contre les végétaux.</p>
-        </div>
-
-        <div class="card">
-          <h4>🧱 Ravalement de façade</h4>
-          <p>Remise en état complète avec réparation et finition.</p>
-        </div>
-
-        <div class="card">
-          <h4>💧 Hydrofugation</h4>
-          <p>Imperméabilisation pour éviter les infiltrations.</p>
-        </div>
-
-        <div class="card">
-          <h4>🛠 Réparation des fissures</h4>
-          <p>Correction des défauts pour garantir solidité et étanchéité.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Pro -->
-    <div class="block">
-      <h3>Pourquoi faire appel à un professionnel ?</h3>
-      <ul>
-        <li>Diagnostic précis</li>
-        <li>Produits adaptés à chaque surface</li>
-        <li>Intervention rapide et durable</li>
-        <li>Respect des obligations légales</li>
-      </ul>
-    </div>
-
-    <!-- Valeur -->
-    <div class="block">
-      <h3>Donnez une nouvelle jeunesse à votre façade</h3>
-      <ul>
-        <li>Maison plus esthétique</li>
-        <li>Valeur immobilière renforcée</li>
-        <li>Moins de dégradations à long terme</li>
-        <li>Meilleure protection contre l’humidité</li>
-      </ul>
-    </div>
-
-    <!-- CTA -->
-    <div class="cta">
-      <h3>Intervention à Romorantin et alentours</h3>
-      <p>
-        Devis gratuit et conseils personnalisés.
-      </p>
-      <button @click="$emit('contact')">
-        Demander un devis
-      </button>
-    </div>
+    <QuestionWithReasons  class="block" :question="data.partTwo.question" :reasons="data.partTwo.reasons"/>
+    <QuestionWithReasons  class="block" :question="data.partThree.question" :reasons="data.partThree.reasons"/>
+    <QuoteRequest @action="openContactModal" />
 
   </section>
 </template>
 
 <script setup>
+import QuestionWithReasons from "@/components/ui/QuestionWithReasons.vue";
+import QuoteRequest from "@/components/ui/QuoteRequest.vue";
+import { data } from "@/components/data/FacadeData.js"
+import AdviceSolution from "@/components/ui/AdviceSolution.vue";
+
 defineEmits(['contact'])
+
+const openContactModal = ()=>{
+  console.log("8888888888888::")
+}
 </script>
 
 <style scoped>
@@ -103,41 +44,10 @@ defineEmits(['contact'])
   color: #555;
 }
 
-.block {
+.block  {
   margin-bottom: 30px;
+  padding: 10px 20px;
+  background-color: #f2f2f2;
 }
 
-ul {
-  padding-left: 20px;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 15px;
-}
-
-.card {
-  background: #f5f5f5;
-  padding: 15px;
-  border-radius: 8px;
-}
-
-.cta {
-  background: #387b7e;
-  color: white;
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center;
-}
-
-button {
-  margin-top: 10px;
-  padding: 10px 15px;
-  border: none;
-  background: white;
-  color: #387b7e;
-  border-radius: 5px;
-  cursor: pointer;
-}
 </style>

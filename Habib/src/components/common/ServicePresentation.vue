@@ -11,25 +11,35 @@
     <div class="content">
       <p>{{ description }}</p>
 
-      <button @click="$emit('click')">
-        {{ buttonText }}
+      <button @click="toggle">
+        {{ currentButtonText }}
       </button>
     </div>
   </div>
 </template>
 
 <script setup>
-defineProps({
+import { ref } from 'vue';
+
+const props = defineProps({
   image: String,
   title: String,
   description: String,
   buttonText: {
     type: String,
-    default: "En savoir plus"
+    default: "+"
   }
 })
 
-defineEmits(['click'])
+const emit = defineEmits(['click'])
+
+const isOpen = ref(false)
+const currentButtonText = ref(props.buttonText)
+const toggle = () => {
+  isOpen.value = !isOpen.value
+  currentButtonText.value = isOpen.value ? "-" : "+"
+  emit('click', isOpen.value)
+}
 </script>
 
 <style scoped>
@@ -68,7 +78,7 @@ button {
   padding: 10px 15px;
   border-radius: 6px;
   cursor: pointer;
-  align-self: end;
+  align-self: start;
 }
 
 button:hover {

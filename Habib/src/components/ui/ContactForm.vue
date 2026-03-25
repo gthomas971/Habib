@@ -48,7 +48,7 @@ input, select {
 }
 
 button {
-  background-color: deepskyblue;
+  background-color: #387b7e;
   color: white;
   border: none;
   padding: 10px;
