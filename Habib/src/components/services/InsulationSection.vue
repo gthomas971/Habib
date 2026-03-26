@@ -35,7 +35,7 @@
 import QuestionWithReasons from "@/components/ui/QuestionWithReasons.vue";
 import AdviceSolution from "@/components/ui/AdviceSolution.vue";
 import QuoteRequest from "@/components/ui/QuoteRequest.vue";
-import { data } from "@/components/data/InsulationData.js";
+import { data } from "@/data/InsulationData.js";
 
 const openContactModal = () => {
   console.log("Ouverture modal contact isolation des combles");

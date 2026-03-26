@@ -22,7 +22,7 @@
 <script setup>
 import QuestionWithReasons from "@/components/ui/QuestionWithReasons.vue";
 import QuoteRequest from "@/components/ui/QuoteRequest.vue";
-import { data } from "@/components/data/FacadeData.js"
+import { data } from "@/data/FacadeData.js"
 import AdviceSolution from "@/components/ui/AdviceSolution.vue";
 
 defineEmits(['contact'])

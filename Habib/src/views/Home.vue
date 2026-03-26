@@ -2,77 +2,83 @@
   <div class="min-h-screen">
     <Header />
     <main>
-      <section id="services-section">
+      <Estimate  v-if="ui.estimateShow" />
+      <section id="services-section" v-else >
         <div class="title">
           <div class="square"></div>
           <h2>Toutes <br> nos prestations</h2>
         </div>
 
-        <div class="roofing-block">
+        <div id="roofing-block">
           <ServicePresentation
               :image="RoofingImage"
               title="Toiture"
               description="Protégez votre maison des intempéries et des infiltrations grâce à un entretien régulier."
               buttonText="+"
-              @click="showRoofing = !showRoofing"
+              @click="ui.setShowRoofing(!ui.showRoofing)"
           />
           <transition name="dropdown">
-            <div v-if="showRoofing">
+            <div v-if="ui.showRoofing">
               <RoofingSection class="roofing-section"/>
             </div>
           </transition>
         </div>
 
-        <div class="facade-block">
+        <div id="facade-block">
           <ServicePresentation
               :image="FacadeImage"
               title="Façade"
               description="Préservez l’esthétique et la solidité de votre façade toute l’année."
               buttonText="+"
-              @click="showFacade = !showFacade"
+              @click="ui.setShowFacade(!ui.showFacade)"
           />
           <transition name="dropdown">
-            <div v-if="showFacade">
+            <div v-if="ui.showFacade">
               <FacadeSection class="facade-section"/>
             </div>
           </transition>
         </div>
 
-        <div class="facade-block">
+        <div id="insulation-block">
           <ServicePresentation
               :image="InsulationImage"
               title="Isolation"
               description="Améliorez le confort et réduisez vos factures d’énergie grâce à une isolation performante."
               buttonText="+"
-              @click="showInsulation = !showInsulation"
+              @click="ui.setShowInsulation(!ui.showInsulation)"
           />
           <transition name="dropdown">
-            <div v-if="showInsulation">
+            <div v-if="ui.showInsulation">
               <InsulationSection class="insulation-section"/>
             </div>
           </transition>
         </div>
       </section>
     </main>
-    <ContactButton />
+    <Footer/>
+    <ContactButton :menu-color="ui.isMenuOpen" />
+
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
+import { useRoute, useRouter } from 'vue-router'
 import ServicePresentation from "@/components/common/ServicePresentation.vue";
 import RoofingSection from "@/components/services/RoofingSection.vue";
 import FacadeSection from "@/components/services/FacadeSection.vue";
+import Estimate from "@/components/common/Estimate.vue";
 import InsulationSection from "@/components/services/InsulationSection.vue";
 import Header from "@/components/layout/Header.vue";
+import Footer from "@/components/layout/Footer.vue";
 import ContactButton from "@/components/common/ContactButton.vue";
 import RoofingImage from '@/assets/images/toiture.png';
 import FacadeImage from '@/assets/images/facade.png';
 import InsulationImage from '@/assets/images/isolation.png';
+import {useUIStore} from "@/store/ui";
 
-const showRoofing = ref(false);
-const showFacade = ref(false);
-const showInsulation = ref(false);
+const ui = useUIStore()
+
 </script>
 
 <style scoped>
@@ -84,6 +90,7 @@ const showInsulation = ref(false);
 }
 
 #services-section {
+  padding: 40px 0;
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -94,7 +101,7 @@ h2 {
   margin: 0;
 }
 
-.roofing-block, .facade-block {
+#roofing-block, #facade-block, #insulation-block {
   padding: 0 20px;
 }
 
@@ -130,4 +137,5 @@ h2 {
   height: 20px;
   width: 20px;
 }
+
 </style>

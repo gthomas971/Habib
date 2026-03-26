@@ -2,44 +2,43 @@
   <header>
     <nav :class="['navbar' , { 'scrolled': isSticky }]">
       <div class="block-logo">
-        <Logo  class="logo" />
+        <Logo  class="logo"  @click="resetPage"/>
         <span class="title-logo">Les <br> Artisans  <br> du Val de Loire</span>
       </div>
-      <button class="burger-menu" @click="toggleMenu">☰</button>
+      <button class="burger-menu" @click="ui.toggleMenu">☰</button>
     </nav>
 
     <div class="content">
       <h1 class="title">LES ARTISANS DU VAL DE LOIRE</h1>
     </div>
 
-    <div class="overlay" v-if="isMenuOpen" @click="toggleMenu"></div>
+    <div class="overlay" v-if="ui.isMenuOpen" @click="ui.toggleMenu"></div>
 
-    <div class="side-menu" :class="{ open: isMenuOpen }">
-      <span class="">Les <br> Artisans  <br> du Val de Loire</span>
-      <ul>
-        <li><a href="#">Toiture</a></li>
-        <li><a href="#">Façade</a></li>
-        <li><a href="#">Isolation</a></li>
-        <li><a href="#">Qui sommes-nous ?</a></li>
-      </ul>
-    </div>
+    <SideMenu />
+
 
   </header>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
+import SideMenu from "@/components/ui/SideMenu.vue";
 import Logo from '@/assets/svgs/logo.svg';
+import { useUIStore } from '@/store/ui'
+
+const ui = useUIStore()
 
 const isSticky = ref(false)
 
-const isMenuOpen = ref(false)
-const toggleMenu = () => {
-  isMenuOpen.value = !isMenuOpen.value
-}
-
 const handleScroll = () => {
-  isSticky.value = window.scrollY > 100 // seuil du scroll
+  isSticky.value = window.scrollY > 100
+}
+const resetPage =()=>{
+  ui.hideEstimate()
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  })
 }
 
 onMounted(() => {
@@ -120,6 +119,7 @@ header {
   height: 60px;
   width: 60px;
   color: white;
+  cursor: pointer;
 }
 
 .burger-menu {
@@ -159,62 +159,6 @@ header {
   z-index: 90;
 }
 
-.side-menu {
-  position: fixed;
-  top: 0;
-  right: -100%;
-  width: 250px;
-  height: 100%;
-  background: #387b7e;
-  color: white;
-  z-index: 100;
-  transition: right 0.4s ease, box-shadow 0.4s ease;
-  padding: 60px 30px;
-  box-shadow: -5px 0 20px rgba(0, 0, 0, 0.2);
-  display: flex;
-  flex-direction: column;
-}
-
-.side-menu.open {
-  right: 0;
-}
-
-.side-menu span {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 40px;
-  line-height: 1.3;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-  color: #fff;
-}
-
-.side-menu ul {
-  list-style: none;
-  padding: 0;
-  flex-grow: 1;
-}
-
-.side-menu li {
-  margin: 20px 0;
-}
-
-.side-menu a {
-  display: inline-block;
-  text-decoration: none;
-  color: white;
-  font-size: 1.2rem;
-  position: relative;
-  transition: color 0.3s ease, transform 0.3s ease;
-}
-
-.side-menu a:hover {
-  color: #ffd700;
-  transform: scale(1.2);
-}
-
-.side-menu a:hover::after {
-  width: 100%;
-}
 
 
 </style>

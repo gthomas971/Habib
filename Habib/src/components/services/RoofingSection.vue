@@ -24,7 +24,7 @@
 import QuestionWithReasons from "@/components/ui/QuestionWithReasons.vue";
 import QuoteRequest from "@/components/ui/QuoteRequest.vue";
 import AdviceSolution from "@/components/ui/AdviceSolution.vue";
-import { data } from "@/components/data/RoofingData.js"
+import { data } from "@/data/RoofingData.js"
 
 const openContactModal = ()=>{
   console.log("YOOOOOOOOOO::")

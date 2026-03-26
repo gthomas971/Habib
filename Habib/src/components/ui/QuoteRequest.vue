@@ -4,12 +4,27 @@
     <p>
       Devis gratuit, conseils personnalisés et intervention rapide.
     </p>
-    <button @click="$emit('action')">Demander un devis</button>
+    <button @click="showEstimate">Demander un devis</button>
   </div>
 </template>
 
 <script setup>
-  defineEmits(['action'])
+import {useUIStore} from "@/store/ui.js";
+
+const ui = useUIStore()
+const showEstimate = ()=>{
+  ui.closeMenu()
+  ui.showEstimate()
+
+  const el = document.getElementById('services-section')
+  if (el) {
+    const top = el.getBoundingClientRect().top + window.scrollY - 100
+    window.scrollTo({
+      top,
+      behavior: 'smooth'
+    })
+  }
+}
 </script>
 
 <style scoped>
