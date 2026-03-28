@@ -2,37 +2,21 @@
   <div :class="['side-menu', { 'open' : ui.isMenuOpen }]">
     <span class="">Les <br> Artisans  <br> du Val de Loire</span>
     <ul>
-      <li><a href="#roofing-block" @click.prevent="goToSection('roofing-block')" >Toiture</a></li>
-      <li><a href="#facade-block" @click.prevent="goToSection('facade-block')">Façade</a></li>
-      <li><a href="#insulation-block" @click.prevent="goToSection('insulation-block')">Isolation</a></li>
+      <li><a href="#roofing-block" @click.prevent="goToSection('roofing-block',ui,true)" >Toiture</a></li>
+      <li><a href="#facade-block" @click.prevent="goToSection('facade-block',ui,true)">Façade</a></li>
+      <li><a href="#insulation-block" @click.prevent="goToSection('insulation-block',ui,true)">Isolation</a></li>
       <li><a href="#">Qui sommes-nous ?</a></li>
     </ul>
-    <button @click="goToSection('services-section')">Devis</button>
+    <button @click="goToSection('estimate-section',ui,true)">Devis</button>
   </div>
 </template>
 
 
 <script setup>
 import { useUIStore } from '@/store/ui'
+import { goToSection } from '@/util/common.js'
 const ui = useUIStore()
 
-function goToSection(id) {
-
-  ui.closeMenu()
-  if(id === "services-section") ui.showEstimate()
-  if(id === "roofing-block") ui.setShowRoofing(true)
-  if(id === "insulation-block") ui.setShowInsulation(true)
-  if(id === "facade-block") ui.setShowFacade(true)
-
-  const el = document.getElementById(id)
-  if (el) {
-    const top = el.getBoundingClientRect().top + window.scrollY - 100
-    window.scrollTo({
-      top,
-      behavior: 'smooth'
-    })
-  }
-}
 </script>
 
 

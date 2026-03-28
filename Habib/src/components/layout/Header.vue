@@ -5,11 +5,12 @@
         <Logo  class="logo"  @click="resetPage"/>
         <span class="title-logo">Les <br> Artisans  <br> du Val de Loire</span>
       </div>
+      <DesktopMenu class="desktop-menu" />
       <button class="burger-menu" @click="ui.toggleMenu">☰</button>
     </nav>
 
     <div class="content">
-      <h1 class="title">LES ARTISANS DU VAL DE LOIRE</h1>
+      <h1 class="title">LES <br>ARTISANS <br>DU VAL DE LOIRE</h1>
     </div>
 
     <div class="overlay" v-if="ui.isMenuOpen" @click="ui.toggleMenu"></div>
@@ -23,6 +24,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import SideMenu from "@/components/ui/SideMenu.vue";
+import DesktopMenu from "@/components/ui/DesktopMenu.vue";
 import Logo from '@/assets/svgs/logo.svg';
 import { useUIStore } from '@/store/ui'
 
@@ -159,6 +161,32 @@ header {
   z-index: 90;
 }
 
+
+.desktop-menu {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .burger-menu {
+    display: none;
+  }
+  .navbar{
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    height: 80px;
+  }
+  .desktop-menu {
+    display: flex;
+  }
+  .title-logo{
+    font-size: 24px;
+  }
+  .logo {
+    height: 80px;
+    width: 80px;
+  }
+}
 
 
 </style>

@@ -11,8 +11,8 @@
     <div class="content">
       <p>{{ description }}</p>
 
-      <button @click="toggle">
-        {{ currentButtonText }}
+      <button @click="$emit('click')" class="hide-desktop">
+        {{ props.isOpen ? "-" : "+" }}
       </button>
     </div>
   </div>
@@ -25,34 +25,40 @@ const props = defineProps({
   image: String,
   title: String,
   description: String,
-  buttonText: {
-    type: String,
-    default: "+"
-  }
+  isOpen: Boolean
 })
 
-const emit = defineEmits(['click'])
+defineEmits(['click'])
 
-const isOpen = ref(false)
-const currentButtonText = ref(props.buttonText)
-const toggle = () => {
-  isOpen.value = !isOpen.value
-  currentButtonText.value = isOpen.value ? "-" : "+"
-  emit('click', isOpen.value)
-}
 </script>
 
 <style scoped>
+
 .card {
-  transition: transform 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--white);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  margin-bottom: 3rem;
+  border-left: 6px solid var(--accent);
 }
 
-.card:hover {
-  transform: translateY(-5px);
+.image-wrapper {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  min-height: 200px;
 }
 
 .image {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 
@@ -62,13 +68,9 @@ const toggle = () => {
   flex-direction: column;
 }
 
-h3 {
-  margin-bottom: 10px;
-}
-
 p {
-  color: #555;
-  margin-bottom: 15px;
+  font-size: 20px;
+  margin-bottom: 1rem;
 }
 
 button {
@@ -81,37 +83,28 @@ button {
   align-self: start;
 }
 
-button:hover {
-  opacity: 0.9;
-}
-
-
-.image-wrapper {
-  position: relative;
-}
-
-.image {
-  width: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* 🔥 Le titre en overlay */
 .image-title {
   position: absolute;
-  bottom: -15px; /* 👈 chevauchement */
-  left: 15px;
-
-  background: #387b7e;
+  bottom: 0;
+  right: 0;
+  background: #2e4a50;
   color: white;
-  padding: 8px 15px;
-  border-radius: 6px;
-
+  padding: 0.5rem 1.5rem;
+  font-size: 1.5rem;
   font-weight: bold;
 }
 
-/* Ajustement pour éviter que ça coupe */
 .content {
-  padding: 25px 15px 15px;
+  flex: 1.5;
+  padding: 2rem;
+}
+
+@media (min-width: 768px) {
+  .card{
+    flex-direction: row;
+  }
+  .image-wrapper{
+    min-height: 250px;
+  }
 }
 </style>

@@ -2,3 +2,18 @@ body{
     margin: 0;
     padding: 0;
 }
+
+@media (min-width: 768px) {
+    .hide-desktop{
+        display: none;
+    }
+}
+:root {
+    --primary: #2c3e50; /* Bleu nuit professionnel */
+    --accent: #387b7e;  /* Orange pour l'action (tuiles/toiture) */
+    --light-bg: #f9f9f9;
+    --white: #ffffff;
+    --text: #333333;
+    --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}

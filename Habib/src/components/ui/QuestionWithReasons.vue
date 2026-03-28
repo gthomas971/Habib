@@ -27,31 +27,61 @@ defineProps({
 
 <style scoped>
 
-.question-reasons{
-
-}
-
-ul {
-  list-style: none;
-  padding-left: 0;
-}
-
-li{
+.block h3 {
+  color: var(--primary);
   position: relative;
-  padding-left: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 40px;
+  padding-left: 0;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-li::before {
+.block h3::before {
   content: "";
   position: absolute;
   left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 10px;
-  height: 10px;
-  background-color: #387b7e;
+  bottom: -8px;
+  width: 40px;
+  height: 3px;
+  background: var(--accent);
   border-radius: 2px;
+}
+
+.block ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 10px;
+}
+
+.block li {
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.block li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: bold;
+}
+
+
+@media (min-width: 768px) {
+  .block h3 {
+    margin-bottom: 40px;
+    padding-left: 15px;
+  }
+
+  .block h3::before {
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    height: auto;
+  }
 }
 
 </style>

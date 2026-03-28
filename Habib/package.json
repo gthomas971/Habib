@@ -16,6 +16,7 @@
     "pinia": "^3.0.4",
     "vite-svg-loader": "^5.1.1",
     "vue": "^3.5.18",
+    "vue-masonry-css": "^1.0.3",
     "vue-router": "^4.5.1"
   },
   "devDependencies": {
